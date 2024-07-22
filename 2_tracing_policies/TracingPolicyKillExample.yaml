@@ -1,0 +1,22 @@
+apiVersion: cilium.io/v1alpha
+kind: TracingPolicy
+metadata:
+  name: "MyFirstTracingPolicy"
+
+spec:
+  kprobes:
+  - call: "fd_install"
+    syscall: false
+    args:
+    - index: 0
+      type: int
+    - index: 1
+      type: "file"
+    selectors:
+    - matchArgs:
+      - index: 1
+        operator: "Equal"
+        values:
+        - "/tmp/myfile"
+      matchActions:
+      - action: SIGKILL  
