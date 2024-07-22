@@ -1,0 +1,17 @@
+apiVersion: cilium.io/v1alpha1
+kind: TracingPolicy
+metadata:
+  name: ipv4-tracing-policy
+spec:
+  kprobes:
+    - call: "tcp_v4_connect"
+      syscall: false
+      args:
+        - index: 0
+          type: 'struct sock *'
+        - index: 1
+          type: 'struct sockaddr *'
+        - index: 2
+          type: int
+      matchActions:
+        - action: "Post"
