@@ -1,0 +1,20 @@
+apiVersion: cilium.io/v1alpha1
+kind: TracingPolicy
+metadata:
+  name: "root-priv-escalation-policy"
+spec:
+  kprobes:
+    - call: "commit_creds"
+      syscall: false
+      args:
+        - index: 0
+          type: "auto"
+      selectors:
+        - matchArgs:
+            - index: 0
+              operator: "Equal"
+              values:
+                - "0"
+          matchActions:
+            - action: Sigkill
+

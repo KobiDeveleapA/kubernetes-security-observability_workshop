@@ -17,4 +17,4 @@ spec:
           values:
           - "/usr/bin/netcat"
         matchActions:
-        - action: Post
+        - action: Sigkill
