@@ -10,11 +10,6 @@ spec:
     - index: 0
       type: "sock"
     selectors:
-    - matchArgs:
-      - index: 0
-        operator: "NotDAddr"
-        values:
-        - 127.0.0.1
-      matchActions:
-      - action: Trace
+    - matchActions:
+        - action: Post
 
